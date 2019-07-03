@@ -1,13 +1,15 @@
-FROM ubuntu
+FROM python:3.7.3-alpine3.10
 
 MAINTAINER Hiroaki Sano <hiroaki.sano.9stories@gmail.com>
 
-RUN apt-get update -y && apt-get install git python python-pip -y
-RUN cd /tmp \
-    && git clone https://github.com/hiroakis/tornado-websocket-example.git \
-    && cd tornado-websocket-example \
-    && pip install -r requirements.txt
+COPY . /root/tornado-websocket-example/
+
+WORKDIR /root/tornado-websocket-example
+
+RUN pip install -r requirements.txt
+
+RUN chmod 755 app.py
 
 EXPOSE 8888
 
-CMD ["python", "/tmp/tornado-websocket-example/app.py"]
+CMD ["/root/tornado-websocket-example/app.py"]

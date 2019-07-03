@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from tornado import websocket, web, ioloop
 import json
 
